@@ -1,0 +1,20 @@
+{
+  "name": "prismarine-support-api",
+  "version": "1.0.0",
+  "description": "Backend API für ServiceDesk Central",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "fastify": "^4.26.1",
+    "@fastify/cors": "^9.0.1",
+    "@fastify/multipart": "^8.1.0",
+    "@fastify/static": "^7.0.1",
+    "@fastify/swagger": "^8.14.0",
+    "@fastify/swagger-ui": "^3.0.0"
+  },
+  "author": "Dein Name",
+  "license": "ISC"
+}
