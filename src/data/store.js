@@ -2,11 +2,11 @@ import { randomUUID } from 'crypto';
 
 /**
  * store.js
- * Dient als In-Memory Datenbank Ersatz.
- * Enthält jetzt automatische Testdaten (Seeding) beim Start.
+ * In-Memory State Management.
+ * Simuliert die Persistenzschicht für den MVP.
  */
 
-// Daten-Container
+// Globaler Daten-Container
 export const db = {
   customers: new Map(),
   tickets: new Map(),
@@ -14,10 +14,10 @@ export const db = {
   files: new Map()
 };
 
-// Hilfsfunktion für eindeutige IDs
+// Generiert UUIDs für Entitäten
 export const generateId = () => randomUUID();
 
-// Initialer Reset
+// Setzt den Store komplett zurück (für Testing-Zwecke)
 export const resetStore = () => {
   db.customers.clear();
   db.tickets.clear();
@@ -25,11 +25,14 @@ export const resetStore = () => {
   db.files.clear();
 };
 
-// --- AUTOMATISCHE TESTDATEN GENERIERUNG (SEEDING) ---
+// Initialisiert die Applikation mit Basis-Daten
 const seedData = () => {
-  console.log('🌱 Generiere automatische Testdaten...');
+  // Verhindert doppeltes Seeding, falls Modul neu geladen wird
+  if (db.customers.size > 0) return;
 
-  // 1. Kunden erstellen
+  console.log('Info: Initialisiere Datenbank mit Seed-Daten...');
+
+  // Customers
   const cust1 = { id: generateId(), name: 'Prismarine Solutions', city: 'Berlin', email: 'info@prismarine.de', createdAt: new Date().toISOString() };
   const cust2 = { id: generateId(), name: 'ACME Corp', city: 'Hamburg', email: 'contact@acme.com', createdAt: new Date().toISOString() };
   const cust3 = { id: generateId(), name: 'Wayne Enterprises', city: 'Gotham', email: 'bruce@wayne.com', createdAt: new Date().toISOString() };
@@ -38,7 +41,7 @@ const seedData = () => {
   db.customers.set(cust2.id, cust2);
   db.customers.set(cust3.id, cust3);
 
-  // 2. Tickets erstellen
+  // Tickets
   const tickets = [
     {
       id: generateId(),
@@ -47,7 +50,7 @@ const seedData = () => {
       status: 'Open',
       priority: 'High',
       customerId: cust1.id,
-      createdAt: new Date(Date.now() - 86400000).toISOString(), // Gestern
+      createdAt: new Date(Date.now() - 86400000).toISOString(),
       updatedAt: new Date().toISOString()
     },
     {
@@ -67,7 +70,7 @@ const seedData = () => {
       status: 'In-Progress',
       priority: 'Medium',
       customerId: cust2.id,
-      createdAt: new Date(Date.now() - 172800000).toISOString(), // Vor 2 Tagen
+      createdAt: new Date(Date.now() - 172800000).toISOString(),
       updatedAt: new Date().toISOString()
     },
     {
@@ -77,7 +80,7 @@ const seedData = () => {
       status: 'Resolved',
       priority: 'Low',
       customerId: cust2.id,
-      createdAt: new Date(Date.now() - 400000000).toISOString(), // Vor ~5 Tagen
+      createdAt: new Date(Date.now() - 400000000).toISOString(),
       updatedAt: new Date().toISOString()
     },
     {
@@ -97,14 +100,14 @@ const seedData = () => {
       status: 'Archived',
       priority: 'High',
       customerId: cust3.id,
-      createdAt: new Date(Date.now() - 1000000000).toISOString(), // Lange her
+      createdAt: new Date(Date.now() - 1000000000).toISOString(),
       updatedAt: new Date().toISOString()
     }
   ];
 
   tickets.forEach(t => db.tickets.set(t.id, t));
 
-  // 3. Kommentare erstellen
+  // Comments
   const comment1 = {
     id: generateId(),
     ticketId: tickets[0].id,
@@ -124,8 +127,7 @@ const seedData = () => {
   db.comments.set(comment1.id, comment1);
   db.comments.set(comment2.id, comment2);
 
-  console.log(`✅ Testdaten geladen: ${db.customers.size} Kunden, ${db.tickets.size} Tickets, ${db.comments.size} Kommentare.`);
+  console.log(`Database Seed complete. Customers: ${db.customers.size}, Tickets: ${db.tickets.size}`);
 };
 
-// Führt die Funktion direkt beim Importieren dieses Moduls aus
 seedData();
