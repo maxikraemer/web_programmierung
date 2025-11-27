@@ -1,87 +1,104 @@
-ServiceDesk Central
+ServiceDesk Central 🎫
 
-Eine Webapplikation zur Verwaltung von Support-Tickets für die Prismarine Solutions GmbH.
-Dieses Projekt wurde im Rahmen der Wiederholungsprüfung "Web-Programmierung" erstellt.
+Eine moderne Webapplikation zur Verwaltung von Support-Tickets, entwickelt für die Prismarine Solutions GmbH.
 
-🚀 Features
+📋 Projektbeschreibung
 
-Ticket-Management: Erstellen, Bearbeiten, Status-Tracking (Draft -> Open -> Resolved).
+ServiceDesk Central ermöglicht es Support-Teams, Kundenanfragen effizient zu verwalten. Das System unterstützt verschiedene Benutzerrollen und bietet Funktionen wie Ticket-Tracking, Dateianhänge und eine Kundenverwaltung.
 
-Rollen-System: Unterschiedliche Berechtigungen für User, Support-Agents und Engineers.
+Hauptfeatures:
 
-Dateiverwaltung: Upload von .txt Logs zu Tickets.
+Ticket-Workflow: Von "Draft" über "Open" bis "Resolved" und "Archived".
 
-Kundenverwaltung: Übersicht und Verknüpfung von Kunden mit Tickets.
+Rollenbasiertes System: Differenzierte Rechte für User, Support-Agents und Engineers.
 
-Responsive UI: Modernes Design basierend auf React und Tailwind CSS.
+Dateiverwaltung: Upload und Abruf von Log-Dateien (.txt).
 
-🛠 Tech Stack
+Responsive UI: Optimiert für Desktop und Tablet Nutzung.
 
-Frontend: React, Vite, Tailwind CSS, Lucide Icons
+LRO Suche: Asynchrone Suche nach Datei-Tags (Long Running Operation).
+
+🛠 Technologie-Stack
+
+Frontend: React, Vite, Tailwind CSS
 
 Backend: Node.js, Fastify
 
-Datenhaltung: In-Memory Store (mit Initial Seeding)
+Datenbank: In-Memory Store (mit Initial Seeding)
 
-📦 Installation & Start
+📦 Installation & Setup
 
-Das Projekt besteht aus zwei Teilen: dem backend (Root) und dem client (Frontend). Beide müssen parallel laufen.
+Das Projekt besteht aus zwei getrennten Anwendungen (Client & Server), die parallel ausgeführt werden müssen.
 
 Voraussetzungen
 
-Node.js (Empfohlen: v18 LTS oder v20 LTS)
+Node.js (Version 18+ empfohlen)
 
-npm
+npm Package Manager
 
-1. Backend starten
+Schritt 1: Backend starten
 
-Öffne ein Terminal im Hauptverzeichnis des Projekts:
+Das Backend stellt die REST-API auf Port 3000 bereit.
 
-# Abhängigkeiten installieren
+Terminal im Hauptverzeichnis öffnen.
+
+Abhängigkeiten installieren:
+
 npm install
 
-# Server starten
+
+Server starten:
+
 npm start
 
 
-Der Server läuft nun unter: http://localhost:3000
+Der Server läuft nun unter http://localhost:3000. Testdaten werden automatisch generiert.
 
-(Testdaten werden beim Start automatisch generiert)
+Schritt 2: Frontend starten
 
-2. Frontend starten
+Der Client (React App) läuft auf Port 5173 (Standard Vite Port).
 
-Öffne ein neues Terminal und navigiere in den Client-Ordner:
+Neues Terminal öffnen und in den Client-Ordner wechseln:
 
 cd client
 
-# Abhängigkeiten installieren
+
+Abhängigkeiten installieren:
+
 npm install
 
-# Entwicklungsserver starten
+
+Entwicklungsserver starten:
+
 npm run dev
 
 
-Die Web-App ist nun erreichbar unter: http://localhost:5173
+Die App ist nun unter http://localhost:5173 erreichbar.
 
-🔑 Bedienung
+🔑 Nutzungshinweise
 
-Da keine echte Login-Maske existiert (laut Anforderung), erfolgt der Rollenwechsel direkt über das Dropdown-Menü in der Navigationsleiste.
+Da es sich um einen MVP ohne komplexe Login-Infrastruktur handelt, erfolgt die Authentifizierung über eine Rollen-Simulation.
 
-User: Kann Tickets erstellen und kommentieren.
+Oben rechts in der Navigationsleiste befindet sich ein Dropdown-Menü.
 
-Support-Agent: Kann Tickets archivieren und Kunden verwalten.
+Dort kann die aktive Rolle (User, Support-Agent, Engineer) gewechselt werden.
 
-Engineer: Kann technische Statuswechsel durchführen (In-Progress, Resolved).
+Die UI passt sich automatisch an die Berechtigungen der gewählten Rolle an (z.B. Sichtbarkeit von Buttons).
 
-📂 Projektstruktur
+📂 Struktur
 
-.
-├── src/                 # Backend Source Code
-│   ├── data/            # In-Memory Store & Seeding
-│   ├── routes/          # API Endpunkte (Tickets, Customers)
-│   └── utils/           # Auth Middleware
-├── client/              # Frontend (React)
-│   ├── src/             # React Komponenten & Pages
-│   └── ...
-├── assets/              # Speicherort für hochgeladene Dateien
-└── ...
+src/ - Backend Quellcode
+
+routes/ - API Endpunkte Definitionen
+
+data/ - Datenmodell und Seeding
+
+client/ - Frontend Quellcode
+
+src/components/ - Wiederverwendbare UI-Elemente
+
+src/pages/ - Hauptansichten (Views)
+
+src/services/ - API Kommunikation
+
+Erstellt im Rahmen der Prüfung Web-Programmierung.
