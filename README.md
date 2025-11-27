@@ -1,104 +1,149 @@
-ServiceDesk Central 🎫
+\documentclass[11pt, a4paper]{article}
 
-Eine moderne Webapplikation zur Verwaltung von Support-Tickets, entwickelt für die Prismarine Solutions GmbH.
+% --- PREAMBLE ---
+\usepackage[a4paper, top=2.5cm, bottom=2.5cm, left=2cm, right=2cm]{geometry}
+\usepackage{fontspec}
+\usepackage[ngerman]{babel}
 
-📋 Projektbeschreibung
+% Fonts
+\setmainfont{Noto Sans}
+\setmonofont{Noto Sans Mono}
 
-ServiceDesk Central ermöglicht es Support-Teams, Kundenanfragen effizient zu verwalten. Das System unterstützt verschiedene Benutzerrollen und bietet Funktionen wie Ticket-Tracking, Dateianhänge und eine Kundenverwaltung.
+% Packages for styling
+\usepackage{xcolor}
+\usepackage{hyperref}
+\usepackage{graphicx}
+\usepackage{listings}
+\usepackage{tcolorbox}
 
-Hauptfeatures:
+% Colors
+\definecolor{codebg}{rgb}{0.95,0.95,0.95}
+\definecolor{primary}{RGB}{37, 99, 235} % Blue
 
-Ticket-Workflow: Von "Draft" über "Open" bis "Resolved" und "Archived".
+% Code styling
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    rulecolor=\color{lightgray},
+    framesep=10pt,
+    xleftmargin=10pt,
+    xrightmargin=10pt
+}
 
-Rollenbasiertes System: Differenzierte Rechte für User, Support-Agents und Engineers.
+% Hyperlink styling
+\hypersetup{
+    colorlinks=true,
+    linkcolor=primary,
+    filecolor=magenta,      
+    urlcolor=primary,
+}
 
-Dateiverwaltung: Upload und Abruf von Log-Dateien (.txt).
+\title{\textbf{ServiceDesk Central 🎫} \\ \large Projekt-Dokumentation \& Anleitung}
+\author{Prismarine Solutions GmbH Dev Team}
+\date{\today}
 
-Responsive UI: Optimiert für Desktop und Tablet Nutzung.
+\begin{document}
 
-LRO Suche: Asynchrone Suche nach Datei-Tags (Long Running Operation).
+\maketitle
 
-🛠 Technologie-Stack
+\section*{Projektbeschreibung}
 
-Frontend: React, Vite, Tailwind CSS
+\textbf{ServiceDesk Central} ist eine moderne Webapplikation zur Verwaltung von Support-Tickets, entwickelt für die \textit{Prismarine Solutions GmbH}. Sie ermöglicht Support-Teams, Kundenanfragen effizient zu verwalten, inklusive Ticket-Tracking, Dateianhängen und Kundenverwaltung.
 
-Backend: Node.js, Fastify
+\subsection*{Hauptfeatures}
+\begin{itemize}
+    \item \textbf{Ticket-Workflow:} Status-Zyklus von "Draft" über "Open" bis "Resolved" und "Archived".
+    \item \textbf{Rollenbasiertes System:} Differenzierte Rechte für User, Support-Agents und Engineers.
+    \item \textbf{Dateiverwaltung:} Upload und Abruf von Log-Dateien (.txt).
+    \item \textbf{Responsive UI:} Optimiert für Desktop und Tablet Nutzung.
+    \item \textbf{LRO Suche:} Asynchrone Suche nach Datei-Tags (Long Running Operation).
+\end{itemize}
 
-Datenbank: In-Memory Store (mit Initial Seeding)
+\hrule
+\vspace{0.5cm}
 
-📦 Installation & Setup
+\section*{Technologie-Stack}
 
-Das Projekt besteht aus zwei getrennten Anwendungen (Client & Server), die parallel ausgeführt werden müssen.
+\begin{itemize}
+    \item \textbf{Frontend:} React, Vite, Tailwind CSS
+    \item \textbf{Backend:} Node.js, Fastify
+    \item \textbf{Datenbank:} In-Memory Store (mit automatischen Testdaten)
+\end{itemize}
 
-Voraussetzungen
+\section*{Installation \& Setup}
 
-Node.js (Version 18+ empfohlen)
+Das Projekt besteht aus zwei getrennten Anwendungen (Client \& Server), die parallel ausgeführt werden müssen.
 
-npm Package Manager
+\subsection*{Voraussetzungen}
+\begin{itemize}
+    \item Node.js (Version 18+ empfohlen)
+    \item npm Package Manager
+\end{itemize}
 
-Schritt 1: Backend starten
-
+\subsection*{Schritt 1: Backend starten}
 Das Backend stellt die REST-API auf Port 3000 bereit.
 
-Terminal im Hauptverzeichnis öffnen.
-
-Abhängigkeiten installieren:
-
+\begin{enumerate}
+    \item Terminal im Hauptverzeichnis öffnen.
+    \item Abhängigkeiten installieren:
+\begin{lstlisting}[language=bash]
 npm install
-
-
-Server starten:
-
+\end{lstlisting}
+    \item Server starten:
+\begin{lstlisting}[language=bash]
 npm start
+\end{lstlisting}
+    \textit{Hinweis: Der Server läuft nun unter http://localhost:3000. Testdaten werden automatisch generiert.}
+\end{enumerate}
 
+\subsection*{Schritt 2: Frontend starten}
+Der Client (React App) läuft auf Port 5173.
 
-Der Server läuft nun unter http://localhost:3000. Testdaten werden automatisch generiert.
-
-Schritt 2: Frontend starten
-
-Der Client (React App) läuft auf Port 5173 (Standard Vite Port).
-
-Neues Terminal öffnen und in den Client-Ordner wechseln:
-
+\begin{enumerate}
+    \item Neues Terminal öffnen und in den Client-Ordner wechseln:
+\begin{lstlisting}[language=bash]
 cd client
-
-
-Abhängigkeiten installieren:
-
+\end{lstlisting}
+    \item Abhängigkeiten installieren:
+\begin{lstlisting}[language=bash]
 npm install
-
-
-Entwicklungsserver starten:
-
+\end{lstlisting}
+    \item Entwicklungsserver starten:
+\begin{lstlisting}[language=bash]
 npm run dev
+\end{lstlisting}
+    \textit{Hinweis: Die App ist nun unter http://localhost:5173 erreichbar.}
+\end{enumerate}
 
+\section*{Nutzungshinweise}
 
-Die App ist nun unter http://localhost:5173 erreichbar.
+Da es sich um einen MVP ohne komplexe Login-Infrastruktur handelt, erfolgt die Authentifizierung über eine \textbf{Rollen-Simulation}.
 
-🔑 Nutzungshinweise
+\begin{itemize}
+    \item Oben rechts in der Navigationsleiste befindet sich ein Dropdown-Menü.
+    \item Dort kann die aktive Rolle (\textbf{User}, \textbf{Support-Agent}, \textbf{Engineer}) gewechselt werden.
+    \item Die Benutzeroberfläche passt sich automatisch an die Berechtigungen an.
+\end{itemize}
 
-Da es sich um einen MVP ohne komplexe Login-Infrastruktur handelt, erfolgt die Authentifizierung über eine Rollen-Simulation.
+\section*{Projektstruktur}
 
-Oben rechts in der Navigationsleiste befindet sich ein Dropdown-Menü.
+\begin{itemize}
+    \item \texttt{src/} - Backend Quellcode
+    \begin{itemize}
+        \item \texttt{routes/} - API Endpunkte
+        \item \texttt{data/} - Datenmodell und Seeding
+    \end{itemize}
+    \item \texttt{client/} - Frontend Quellcode
+    \begin{itemize}
+        \item \texttt{src/components/} - UI-Elemente
+        \item \texttt{src/pages/} - Hauptansichten
+        \item \texttt{src/services/} - API Kommunikation
+    \end{itemize}
+\end{itemize}
 
-Dort kann die aktive Rolle (User, Support-Agent, Engineer) gewechselt werden.
+\vspace{1cm}
+\textit{\small Erstellt im Rahmen der Prüfung Web-Programmierung.}
 
-Die UI passt sich automatisch an die Berechtigungen der gewählten Rolle an (z.B. Sichtbarkeit von Buttons).
-
-📂 Struktur
-
-src/ - Backend Quellcode
-
-routes/ - API Endpunkte Definitionen
-
-data/ - Datenmodell und Seeding
-
-client/ - Frontend Quellcode
-
-src/components/ - Wiederverwendbare UI-Elemente
-
-src/pages/ - Hauptansichten (Views)
-
-src/services/ - API Kommunikation
-
-Erstellt im Rahmen der Prüfung Web-Programmierung.
+\end{document}
