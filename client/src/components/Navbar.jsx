@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Briefcase, User } from 'lucide-react';
+import { Briefcase, User, Search } from 'lucide-react';
 
 /**
  * Navbar Komponente
@@ -34,6 +34,9 @@ const Navbar = () => {
           {/* Navigation Links */}
           <Link to="/" className="hover:text-slate-300 transition-colors font-medium">Tickets</Link>
           <Link to="/customers" className="hover:text-slate-300 transition-colors font-medium">Kunden</Link>
+          <Link to="/tag-search" className="hover:text-slate-300 transition-colors font-medium flex items-center gap-1">
+            <Search size={18} /> Suche
+          </Link>
           
           {/* Rollen-Selector (MVP Feature) */}
           <div className="flex items-center gap-2 bg-slate-700 px-3 py-1 rounded border border-slate-600">

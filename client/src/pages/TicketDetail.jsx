@@ -186,17 +186,28 @@ const TicketDetail = () => {
             <FileText size={16}/> Dateien
           </h3>
           
-          <div className="space-y-2 mb-4">
+          <div className="space-y-3 mb-4">
             {files.map(f => (
-              <a 
-                key={f.id} 
-                href={`http://localhost:3000${f.url}`} 
-                target="_blank" 
-                rel="noreferrer"
-                className="block p-2 bg-slate-50 rounded hover:bg-slate-100 text-sm text-blue-600 truncate transition-colors"
-              >
-                {f.originalName}
-              </a>
+              <div key={f.id} className="block p-3 bg-slate-50 rounded hover:bg-slate-100 transition-colors border border-slate-100">
+                <div className="flex justify-between items-center mb-1">
+                  <a 
+                    href={`http://localhost:3000${f.url}`} 
+                    target="_blank" 
+                    rel="noreferrer"
+                    className="text-sm text-blue-600 font-medium truncate hover:underline"
+                  >
+                    {f.originalName}
+                  </a>
+                  {/* Tags anzeigen */}
+                  <div className="flex gap-1">
+                    {f.tags && f.tags.map((tag, i) => (
+                      <span key={i} className="text-[10px] bg-gray-200 text-gray-600 px-1.5 py-0.5 rounded">
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
             ))}
             {files.length === 0 && <span className="text-xs text-gray-400 italic">Keine Dateien hochgeladen.</span>}
           </div>
@@ -204,7 +215,7 @@ const TicketDetail = () => {
           <div className="border-t pt-3">
             <label className="block text-xs font-medium text-gray-700 mb-2">Upload (.txt)</label>
             <label className="cursor-pointer bg-slate-100 px-3 py-2 rounded hover:bg-slate-200 text-sm flex items-center gap-2 w-full justify-center text-slate-600 transition-colors border border-dashed border-slate-300">
-              <Upload size={14} /> Datei auswählen
+              <Upload size={14} /> Datei wählen
               <input type="file" className="hidden" accept=".txt" onChange={handleFileUpload} />
             </label>
           </div>

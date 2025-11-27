@@ -62,5 +62,26 @@ export const api = {
 
     if (!res.ok) throw new Error('Upload fehlgeschlagen');
     return res.json();
+  },
+
+  // Tags einer Datei aktualisieren
+  async updateFileTags(fileId, tags) {
+    return this.fetch(`/files/${fileId}/tags`, {
+      method: 'PUT',
+      body: JSON.stringify({ tags })
+    });
+  },
+
+  // LRO Suche starten
+  async startTagSearch(tags) {
+    return this.fetch('/files/search', {
+      method: 'POST',
+      body: JSON.stringify({ tags })
+    });
+  },
+
+  // LRO Status abfragen
+  async getTaskStatus(taskId) {
+    return this.fetch(`/tasks/${taskId}`);
   }
 };
